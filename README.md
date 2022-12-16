@@ -1,2 +1,3 @@
-<h1>#Employees-List via React</h1>
-<p>Completed pet-project from Udemy course.</p>
+# Employees-List via React
+
+Completed pet-project from Udemy course.
