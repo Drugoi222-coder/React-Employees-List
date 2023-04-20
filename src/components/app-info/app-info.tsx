@@ -1,5 +1,12 @@
 import './app-info.css'
-const AppInfo = (props) => {
+import { FC } from 'react'
+
+interface IProps {
+    genAmount: number;
+    premAmount: number;
+}
+
+const AppInfo: FC<IProps> = (props) => {
     const {premAmount, genAmount} = props;
     return (
         <div className="app-info">
