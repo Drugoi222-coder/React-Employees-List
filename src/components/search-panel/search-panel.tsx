@@ -1,5 +1,5 @@
-import "./search-panel.css";
-import { Component, ChangeEvent } from "react";
+import './search-panel.css';
+import { Component, ChangeEvent } from 'react';
 
 interface IProperties {
     onUpdateSearch: (term: string) => void;
@@ -9,17 +9,20 @@ interface IState {
     term: string;
 }
 
+// Компонент с панелью поиска
 class SearchPanel extends Component<IProperties, IState> {
     constructor(props: IProperties) {
         super(props);
         this.state = {
-            term: "",
+            term: '',
         };
     }
+    // Обновление списка сотрудников при вводе
     onUpdateSearch = (e: ChangeEvent<HTMLInputElement>) => {
         const term = e.target.value;
+        const { onUpdateSearch } = this.props;
         this.setState({ term });
-        this.props.onUpdateSearch(term);
+        onUpdateSearch(term);
     };
     render() {
         return (

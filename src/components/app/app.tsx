@@ -1,24 +1,13 @@
-import { Component } from "react";
-import AppInfo from "../app-info/app-info";
-import SearchPanel from "../search-panel/search-panel";
-import AppFilter from "../app-filter/app-filter";
-import EmployersList from "../employers-list/employers-list";
-import EmployersAddForm from "../employers-add-form/employers-add-form";
-import "./app.css";
-
-enum Filter {
-    ALL = "all",
-    RISE = "rise",
-    MORE = "more"
-}
-
-interface Employee {
-    name: string;
-    salary: number;
-    increase: boolean;
-    id: number;
-    rise: boolean;
-}
+import { Component } from 'react';
+import { Employee } from '../../TS/interfaces';
+import { Filter } from '../../TS/enums';
+import { togglingFilter } from '../../TS/types';
+import AppInfo from '../app-info/app-info';
+import SearchPanel from '../search-panel/search-panel';
+import AppFilter from '../app-filter/app-filter';
+import EmployersList from '../employers-list/employers-list';
+import EmployersAddForm from '../employers-add-form/employers-add-form';
+import './app.css';
 
 interface IState {
     data: Employee[];
@@ -26,9 +15,10 @@ interface IState {
     filter: Filter;
 }
 
-type TStateData = IState['data'];
-type TStateFilter = IState['filter'];
+type TStateData = IState['data']; // Данные состояния
+type TStateFilter = IState['filter']; // Фильтры состояния
 
+// Основной компонент
 class App extends Component<{}, IState> {
     maxId: number;
 
@@ -37,37 +27,39 @@ class App extends Component<{}, IState> {
         this.state = {
             data: [
                 {
-                    name: "Bogdan G.",
+                    name: 'Bogdan G.',
                     salary: 800,
                     increase: false,
                     id: 1,
                     rise: true,
                 },
                 {
-                    name: "Timothy D.",
+                    name: 'Timothy D.',
                     salary: 500,
                     increase: true,
                     id: 2,
                     rise: false,
                 },
                 {
-                    name: "Alex A.",
+                    name: 'Alex A.',
                     salary: 1200,
                     increase: false,
                     id: 3,
                     rise: false,
                 },
             ],
-            term: "",
+            term: '',
             filter: Filter.ALL,
         };
         this.maxId = this.state.data[this.state.data.length - 1].id;
     }
+    // Удаление работника из списка
     deleteItem = (id: typeof this.maxId): void => {
         this.setState(({ data }) => ({
             data: data.filter((item) => item.id !== id),
         }));
     };
+    // Добавление работника в список
     addItem = (obj: Employee): void => {
         this.setState(({ data }) => {
             if (obj.name.length >= 3 && String(obj.salary).length > 0) {
@@ -77,10 +69,9 @@ class App extends Component<{}, IState> {
             }
         });
     };
-    onToggleProp = (
-        id: typeof this.maxId,
-        prop: 'rise' | 'increase'
-    ): void => {
+    // Переключение свойств работников: премия/повышение.
+    // В приложении премия - печенька, повышение - звёздочка.
+    onToggleProp = (id: typeof this.maxId, prop: togglingFilter): void => {
         this.setState(({ data }) => ({
             data: data.map((item) => {
                 if (item.id === id && prop in item) {
@@ -90,6 +81,7 @@ class App extends Component<{}, IState> {
             }),
         }));
     };
+    // Поиск сотрудника в списке
     searchEmp = (items: TStateData, term: string): TStateData => {
         if (term.length === 0) {
             return items;
@@ -99,9 +91,11 @@ class App extends Component<{}, IState> {
             });
         }
     };
+    // Обновление списка при вводе с клавиатуры
     onUpdateSearch = (term: string): void => {
         this.setState({ term });
     };
+    // Фильтрация сотрудников в списке
     onFilter = (items: TStateData, filter: TStateFilter): TStateData => {
         switch (filter) {
             case Filter.RISE:
@@ -112,9 +106,11 @@ class App extends Component<{}, IState> {
                 return items;
         }
     };
+    // Выбор фильтра
     onFilterSelect = (filter: TStateFilter): void => {
         this.setState({ filter });
     };
+    // Изменение зарплаты текущих работников
     onSalaryChange = (id: typeof this.maxId, value: number): void => {
         this.setState(({ data }) => {
             return {
@@ -130,12 +126,14 @@ class App extends Component<{}, IState> {
     };
     render() {
         const { data, term, filter } = this.state;
-        const visibleData = this.onFilter(this.searchEmp(data, term), filter);
+        const visibleData = this.onFilter(this.searchEmp(data, term), filter); // Отфильтрованный список сотрудников
+        const generalEmployees = data.length; // Количество всех сотрудников
+        const premiumEmployees = data.filter((i) => i.increase).length; // Количество сотрудников с премией
         return (
-            <div className="app">
+            <main className="app">
                 <AppInfo
-                    genAmount={data.length}
-                    premAmount={data.filter((i) => i.increase).length}
+                    genAmount={generalEmployees}
+                    premAmount={premiumEmployees}
                 />
                 <div className="search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch} />
@@ -151,7 +149,7 @@ class App extends Component<{}, IState> {
                     onSalaryChange={this.onSalaryChange}
                 />
                 <EmployersAddForm maxId={this.maxId} onAdd={this.addItem} />
-            </div>
+            </main>
         );
     }
 }
