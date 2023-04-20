@@ -68,7 +68,7 @@ class App extends Component<{}, IState> {
             data: data.filter((item) => item.id !== id),
         }));
     };
-    addItem = (obj: TStateData[0]): void => {
+    addItem = (obj: Employee): void => {
         this.setState(({ data }) => {
             if (obj.name.length >= 3 && String(obj.salary).length > 0) {
                 return {
@@ -79,7 +79,7 @@ class App extends Component<{}, IState> {
     };
     onToggleProp = (
         id: typeof this.maxId,
-        prop: keyof TStateData[0]
+        prop: 'rise' | 'increase'
     ): void => {
         this.setState(({ data }) => ({
             data: data.map((item) => {

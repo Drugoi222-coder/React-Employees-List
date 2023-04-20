@@ -1,6 +1,17 @@
-import './employers-list-item.css'
+import './employers-list-item.css';
+import { FC, MouseEvent, ChangeEvent} from 'react';
 
-function EmployersListItem (props) {
+interface IProps {
+    name: string;
+    salary: number;
+    increase: boolean;
+    rise: boolean;
+    onDelete: () => void;
+    onToggleProp: (e: MouseEvent<HTMLSpanElement | HTMLButtonElement>) => void;
+    onSalaryChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const EmployersListItem: FC<IProps> = (props) => {
     const {name , salary, onDelete, onToggleProp, increase, rise, onSalaryChange} = props;
     return (
         <li className={"list-group-item d-flex justify-content-between" + (increase ? " increase" : '') + (rise ? " like" : '')}>
