@@ -1,8 +1,8 @@
 import "./employers-list.css";
 import EmployersListItem from "../employers-list-item/employers-list-item";
 import { ChangeEvent, FC, MouseEvent } from "react";
-import { Employee as Data } from "../../TS/interfaces";
-import { togglingFilter } from "../../TS/types";
+import { Employee as Data } from "../../ts/interfaces";
+import { togglingFilter } from "../../ts/types";
 
 interface IProps {
   data: Data[];

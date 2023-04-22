@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Filter } from '../../TS/enums';
+import { Filter } from '../../ts/enums';
 import './app-filter.css';
 
 interface IProps {

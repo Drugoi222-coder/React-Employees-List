@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { Employee } from '../../TS/interfaces';
-import { Filter } from '../../TS/enums';
-import { togglingFilter } from '../../TS/types';
+import { Employee } from '../../ts/interfaces';
+import { Filter } from '../../ts/enums';
+import { togglingFilter } from '../../ts/types';
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
 import AppFilter from '../app-filter/app-filter';

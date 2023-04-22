@@ -1,6 +1,6 @@
 import './employers-add-form.css';
 import { Component, MouseEvent, ChangeEvent } from 'react';
-import { Employee } from '../../TS/interfaces';
+import { Employee } from '../../ts/interfaces';
 
 interface IProps {
     onAdd: (obj: Employee) => void;

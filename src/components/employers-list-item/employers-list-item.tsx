@@ -1,6 +1,6 @@
 import './employers-list-item.css';
 import { FC, MouseEvent, ChangeEvent } from 'react';
-import { Employee } from '../../TS/interfaces';
+import { Employee } from '../../ts/interfaces';
 
 interface IProps extends Omit<Employee, 'id'> {
     onDelete: () => void;
