@@ -38,7 +38,7 @@ const EmployersListItem: FC<IProps> = (props) => {
                 type="text"
                 onChange={onSalaryChange}
                 className="list-group-item-input"
-                defaultValue={salary + '$'}
+                defaultValue={`${salary}$`}
             />
             <div className="d-flex justify-content-center align-items-center">
                 <button

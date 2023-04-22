@@ -32,7 +32,7 @@ const EmployersList: FC<IProps> = ({
     };
     // Отслеживание изменения зарплаты
     const changeSalary: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-      onSalaryChange(id, Number(e.target.value));
+      onSalaryChange(id, Number(e.target.value.slice(0,-1)));
     };
     // Удаление сотрудника
     const deleteEmp: () => void = () => {

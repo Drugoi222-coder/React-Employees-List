@@ -116,7 +116,7 @@ class App extends Component<{}, IState> {
             return {
                 data: data.map((item) => {
                     if (item.id === id) {
-                        item.salary = Number(String(value).slice(0, -1));
+                        item.salary = value;
                         return { ...item };
                     }
                     return item;
